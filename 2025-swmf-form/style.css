@@ -1,0 +1,520 @@
+@media screen {
+
+    :root {
+        --city-blue: #001A70;
+        --city-green: #007934;
+        --background: white;
+        --light-background: #F0F0F0;
+        --border: gray;
+        --focus-background: aliceblue;
+        --focus-border: darkgray;
+        --checked: var(--city-blue);
+        --hover: #e6fee6;
+        --checked-hover: var(--city-green);
+        --button-hover: lightgray;
+        --radio-height: 3em;
+        --checkbox-height: 30px;
+    }
+    
+    .screenHidden {
+        display: none !important;
+    }
+
+    * {
+        font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        box-sizing: border-box;
+    }
+    
+    p {
+        margin: 15px;
+        margin-bottom: 0;
+    }
+    
+    strong {
+        font-size: 16pt;
+        font-weight: bold;
+    }
+
+    form {
+        width: 100%;
+        min-width: 32em;
+        max-width: 80em;
+    }
+    
+    button, fieldset {
+        padding: 5px;
+        border-radius: 3px;
+        width: auto;
+    }
+    
+    button {
+        border: solid gray 1px;
+        margin: 15px 5px 5px 15px;
+    }
+    
+    button + button {
+        margin-left: 0px;
+    }
+    
+    button:hover {
+        background-color: var(--button-hover);
+    }
+
+    fieldset {
+        border: solid black 2px;
+        margin: 5px 15px;
+    }
+    
+    fieldset[id^="main"] {
+        padding: 0 5px;
+    }
+
+    fieldset.main {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+        margin: 8px 0;
+        gap: 5px;
+        align-items: center;
+        height: auto;
+        border: solid lightgray 2px;
+    }
+
+    fieldset.checkbox {
+        display: flex;
+        flex-flow: row wrap;
+        border: solid var(--border) 1px;
+        border-radius: 3px;
+        margin: 0;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    fieldset.main:nth-child(odd) {
+        background-color: var(--light-background);
+    }
+
+    legend {
+        font-size: 16pt;
+        font-weight: lighter;
+        padding: 0 5px;
+        margin: 0 5px;
+    }
+
+    fieldset.main > legend {
+        font-size: 14pt;
+        float: left;
+        flex: 1 3 10em;
+    }
+
+    fieldset.checkbox > legend {
+        flex: 1 1 100%;
+        float: left;
+        font: inherit;
+        margin: 0;
+        padding: 0;
+        align-self: flex-start;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: solid var(--border) 1px;
+        border-radius: inherit;
+        padding: 5px;
+    }
+
+    label.facilityName {
+        flex: 1 1 72%;
+    }
+    
+    label.number {
+        flex: 1 1 24%;
+    }
+    
+    label.long {
+        flex: 1 1 100%;
+    }
+
+    label.short {
+        flex: 1 1 auto;
+    }
+
+    label.medium {
+        flex: 2 2 auto;
+    }
+    
+    label.mediumLong {
+        flex: 8 8 auto;
+    }
+
+    fieldset.main > label {
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        height: var(--radio-height);
+        flex: auto;
+        border-radius: var(--radio-height);
+        background-color: var(--background);
+    }
+
+    #facilityFieldset div, #inspectionFieldset div {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        gap: 5px;
+    }
+    
+    #facilityFieldset input, #facilityFieldset label, #inspectionFieldset input, #inspectionFieldset label {
+        border-radius: 3px;
+    }
+    
+    fieldset.checkbox label {
+        flex: 1 1 auto;
+        border: solid lightgray 1px;
+        border-radius: inherit;
+        padding: 0;
+        margin: 0;
+        height: var(--checkbox-height);
+        text-align: center;
+    }
+
+    input, select {
+        border: solid lightgray 1px;
+        border-radius: inherit;
+        margin: inherit;
+        padding: inherit;
+        margin-top: 5px;
+    }
+
+    input:focus, select:focus {
+        background-color: var(--focus-background);
+        border-color: var(--focus-border);
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+    }
+
+    .radioSpan {
+        height: 100%;
+        width: 100%;
+        line-height: var(--radio-height);
+        vertical-align: middle;
+        border-radius: inherit;
+    }
+    
+    .checkbox .radioSpan {
+        line-height: var(--checkbox-height);
+        padding: 0 5px;
+        font-size: 10pt;
+    }
+
+    input:checked + .radioSpan {
+        background-color: var(--checked);
+        color: white;
+        z-index: 0;
+    }
+
+    input:hover + .radioSpan, input:focus + .radioSpan, input:hover:not(:focus), select:hover:not(:focus) {
+        background-color: var(--hover);
+    }
+
+    input:checked:hover + .radioSpan, input:checked:focus + .radioSpan {
+        background-color: var(--checked-hover);
+    }
+
+    #notesTextarea {
+        width: 100%;
+        height: 12em;
+        resize: none;
+        border: solid gray 1px;
+        border-radius: 4px;
+        padding: 6px;
+    }
+    
+    #csv-text {
+        display: block;
+        width: 100%;
+        height: 6em;
+        resize: none;
+        border: solid gray 1px;
+        border-radius: 4px;
+        padding: 6px;
+    }
+    
+    .csv-div {
+        padding: 5px 15px;
+        width: 100%;
+        min-width: 32em;
+        max-width: 80em;
+    }
+    
+}
+
+@media print {
+    
+    :root {
+        --city-blue: #001A70;
+        --city-green: #007934;
+        --background: white;
+        --light-background: #F0F0F0;
+        --border: gray;
+        --focus-background: aliceblue;
+        --focus-border: darkgray;
+        --checked: var(--city-blue);
+        --hover: #e6fee6;
+        --checked-hover: var(--city-green);
+        --radio-height: 1.3em;
+        --radio-width: var(--radio-height);
+        --header-height: 20px;
+    }
+    
+    .printHidden {
+        display: none !important;
+    }
+
+    * {
+        font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        box-sizing: border-box;
+    }
+
+    form {
+        width: 100%;
+        min-width: 32em;
+        max-width: 80em;
+    }
+    
+    button, fieldset {
+        padding: 5px;
+        border-radius: 3px;
+        width: auto;
+    }
+    
+    button {
+        border: solid gray 1px;
+        margin: 15px 5px 5px 15px;
+    }
+    
+    button + button {
+        margin-left: 0px;
+    }
+    
+    button[type="submit"] {
+        display: none;
+    }
+
+    fieldset {
+        border: solid black 2px;
+        margin: 5px 15px;
+    }
+    
+    fieldset[id^="main"] {
+        display: table;
+        table-layout: fixed;
+        page-break-inside: auto;
+        padding: 0 5px;
+    }
+    
+    fieldset.checkbox {
+        margin: 0;
+        padding: 0 5px;
+        height: 100%;
+    }
+
+    .main, .tableRow {
+        display: block;
+        page-break-inside: avoid;
+        page-break-after: auto;
+        border-spacing: 2px;
+        width: 100%;
+        margin: 5px 0;
+        padding: 2px;
+        align-items: center;
+        height: auto;
+        border: solid lightgray 2px;
+    }
+    
+    .tableRow {
+        padding: 0;
+        border: 0;
+        margin-top: 0;
+    }
+    
+    legend + .main {
+        page-break-before: avoid;
+    }
+    
+    .main > * {
+        display: table-cell;
+    }
+    
+    .tableRow > * {
+        display: inline-block;
+        border: none;
+        width: 49%;
+        font-size: 10pt;
+    }
+    
+    .tableRow input, .tableRow select {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    form > * > legend {
+        display: block;
+        page-break-inside: avoid;
+        font-size: 14pt;
+        font-weight: lighter;
+        padding: 0 5px;
+        margin: 0 5px;
+    }
+
+    legend:not(form > * > legend) {
+        font-size: 12pt;
+        display: block;
+        font-weight: normal;
+        float: left;
+        vertical-align: center;
+        width: 40%;
+    }
+    
+    fieldset.checkbox > legend {
+        font-size: 10pt;
+        display: block;
+        width: 100%;
+    }
+
+    label {
+        border: solid var(--border) 1px;
+        border-radius: 3px;
+        padding: 0 5px;
+    }
+
+    .main > label {
+        align-content: center;
+        float: none;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        border-radius: 50%;
+        background-color: var(--background);
+        height: var(--radio-width);
+        width: var(--radio-width);
+        min-width: var(--radio-width);
+        max-width: var(--radio-width);
+    }
+    
+    fieldset.checkbox > label {
+        display: inline-block;
+        padding: 0;
+        border: solid lightgray 1px;
+        width: auto;
+    }
+
+    #facilityFieldset, #inspectionFieldset {
+        padding: 0;
+    }
+
+    input, select {
+        border: solid lightgray 1px;
+        border-radius: inherit;
+        margin: inherit;
+        padding: inherit;
+        margin-top: 5px;
+    }
+
+    input:focus {
+        background-color: var(--focus-background);
+        border-color: var(--focus-border);
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+    }
+
+    .radioSpan {
+        float: left;
+        font-size: 8pt;
+        padding-top: 0.3em;
+        height: 100%;
+        width: 100%;
+        border-radius: inherit;
+    }
+    
+    .checkbox .radioSpan {
+        float: none;
+        display: inline-block;
+        line-height: var(--header-height);
+        padding: 0 3px;
+        font-size: 10pt;
+    }
+
+    input:checked + .radioSpan {
+        background-color: var(--checked);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        color: white;
+        z-index: 0;
+    }
+
+    input:hover + .radioSpan {
+        background-color: var(--hover);
+    }
+
+    input:checked:hover + .radioSpan {
+        background-color: var(--checked-hover);
+    }
+
+    #notesTextarea {
+        width: 100%;
+        height: 12em;
+        resize: none;
+        border: solid gray 1px;
+        border-radius: 4px;
+        padding: 6px;
+    }
+    
+    .score > label{
+        display: block;
+        border: 0;
+        text-align: right;
+        margin-right: 60%;
+        margin-left: auto;
+        width: 30%;
+    }
+    
+    .score > label:last-of-type {
+        font-weight: bold;
+        border-top: solid black 1px;
+        border-radius: 0;
+    }
+    
+    .score input {
+        margin: 0;
+        width: 25%;
+        font-weight: inherit;
+        border: 0;
+        text-align: left;
+        font-size: inherit;
+    }
+    
+}
