@@ -1,0 +1,44 @@
+/* THEMES */
+  /* LIGHT THEME */
+  @media (prefers-color-scheme: light) { :root {
+    --col2: #fff;
+    --col4: #ccc;
+    --col6: #555;
+    --col8: #000;
+    --colBlue: #46c;
+    --colPurple: #84c;
+  } }
+    /* DARK THEME */
+  @media (prefers-color-scheme: dark) { :root {
+    --col2: #000;
+    --col4: #555;
+    --col6: #ccc;
+    --col8: white;
+    --colBlue: #57c;
+    --colPurple: #95c;
+  } }
+
+:root {
+  background: var(--col2);
+  color: var(--col8);
+}
+
+body {
+  width: 85%;
+  min-width: 300px;
+  max-width: 960px;
+}
+
+a:link {
+  color: var(--colBlue);
+}
+
+a:visited {
+  color: var(--colPurple);
+}
+
+pre {
+  background: var(--col4);
+  width: fit-content;
+  padding: 1rem;
+}
