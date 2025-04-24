@@ -29,6 +29,10 @@ body {
   max-width: 960px;
 }
 
+li {
+  margin: 0.75rem 0;
+}
+
 a:link {
   color: var(--colBlue);
 }
