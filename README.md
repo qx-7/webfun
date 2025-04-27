@@ -1,7 +1,7 @@
 # webfun: having fun on the web!
 
-![layout: AGPL-3.0-or-later](https://img.shields.io/badge/layout-AGPL--3.0--or--later-indianred?labelColor=darkslategrey)
 ![content: CC BY-SA 4.0](https://img.shields.io/badge/content-CC_BY--SA_4.0-indianred?labelColor=darkslategrey)
+![layout: AGPL-3.0-or-later](https://img.shields.io/badge/remaining_code-AGPL--3.0--or--later-indianred?labelColor=darkslategrey)
 
 ## About
 
