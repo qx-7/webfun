@@ -1,5 +1,8 @@
 # webfun: having fun on the web!
 
+![layout: AGPL-3.0-or-later](https://img.shields.io/badge/layout-AGPL--3.0--or--later-indianred?labelColor=darkslategrey)
+![content: CC BY-SA 4.0](https://img.shields.io/badge/content-CC_BY--SA_4.0-indianred?labelColor=darkslategrey)
+
 ## About
 
 This is my space to mess around with weird website stuff. I want my main site to be kept mostly free of unfinished crap, so it'll end up here (or something). Check it out at [webfun.meadwell.net](https://webfun.meadwell.net/)!
