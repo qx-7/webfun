@@ -1,6 +1,9 @@
 module RippleCarryAdder exposing
-    ( fullAdder
+    ( andGate
+    , fullAdder
     , halfAdder
+    , inverter
+    , orGate
     , rippleCarryAdder
     )
 
