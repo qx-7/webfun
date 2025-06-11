@@ -1,9 +1,4 @@
 body {
     margin: auto;
-    width: fit-content;
-}
-
-h1 {
-    margin: 1rem auto;
-    width: fit-content;
+    max-width: fit-content;
 }
