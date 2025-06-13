@@ -27,7 +27,8 @@ type alias Author =
 type alias Post =
     { id : Int
     , title : String
-    , author : Author
+    , authorName : String
+    , authorUrl : String
     }
 
 
@@ -102,7 +103,7 @@ viewPost post =
         , td []
             [ text post.title ]
         , td []
-            [ a [ href post.author.url ] [ text post.author.name ] ]
+            [ a [ href post.authorUrl ] [ text post.authorName ] ]
         ]
 
 
@@ -118,7 +119,22 @@ postDecoder =
     Decode.succeed Post
         |> required "id" int
         |> required "title" string
-        |> required "author" authorDecoder
+        |> requiredAt [ "author", "name" ] string
+        |> requiredAt [ "author", "url" ] string
+
+
+
+{--
+--if using Json.Decode (vs Json.Decode.Pipeline), here is how:
+
+postDecoder : Decoder Post
+postDecoder =
+    map4 Post
+        (field "id" int)
+        (field "title" string)
+        (at [ "author", "name" ] string)
+        (at [ "author", "url" ] string)
+--}
 
 
 httpCommand : Cmd Msg
