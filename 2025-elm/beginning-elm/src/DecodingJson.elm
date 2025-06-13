@@ -5,23 +5,8 @@ import Html exposing (..)
 import Html.Attributes exposing (href)
 import Html.Events exposing (onClick)
 import Http
-import Json.Decode as Decode
-    exposing
-        ( Decoder
-        , decodeString
-        , field
-        , int
-        , list
-        , map3
-        , string
-        )
-import Json.Decode.Pipeline exposing (optional, optionalAt, required, requiredAt)
-
-
-type alias Author =
-    { name : String
-    , url : String
-    }
+import Json.Decode as Decode exposing (Decoder, int, list, string)
+import Json.Decode.Pipeline exposing (required)
 
 
 type alias Post =
@@ -107,20 +92,13 @@ viewPost post =
         ]
 
 
-authorDecoder : Decoder Author
-authorDecoder =
-    Decode.succeed Author
-        |> required "name" string
-        |> required "url" string
-
-
 postDecoder : Decoder Post
 postDecoder =
     Decode.succeed Post
         |> required "id" int
         |> required "title" string
-        |> requiredAt [ "author", "name" ] string
-        |> requiredAt [ "author", "url" ] string
+        |> required "authorName" string
+        |> required "authorUrl" string
 
 
 
