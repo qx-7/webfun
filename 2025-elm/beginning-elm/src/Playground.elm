@@ -1,6 +1,7 @@
 module Playground exposing (doubleScores, main, signUp)
 
 import Html
+import Regex exposing (..)
 import Signup exposing (Msg(..))
 
 
