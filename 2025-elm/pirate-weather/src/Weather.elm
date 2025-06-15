@@ -1,10 +1,9 @@
-module Weather exposing (main)
+module Weather exposing (capitalizeFirstLetter, main)
 
 import Browser
 import Css exposing (..)
-import Html.Attributes exposing (for)
 import Html.Styled exposing (..)
-import Html.Styled.Attributes exposing (action, name, placeholder, type_, value)
+import Html.Styled.Attributes exposing (for, id, name, placeholder, type_, value)
 import Html.Styled.Events exposing (onClick, onInput)
 import Http
 import Json.Decode as Decode exposing (Decoder, decodeString, float, int, list, string)
@@ -90,15 +89,41 @@ inputCoordinateFromModel model axisNumber =
 
                 _ ->
                     "unknown"
+
+        axisId =
+            axisName
     in
-    styledInput
-        [ type_ "text"
-        , name axisName
-        , placeholder "e.g. -12.3"
-        , value (extractCoordFromModel model axisNumber)
-        , onInput (updateAxis axisNumber)
+    div []
+        [ styledLabel [ for axisId ] [ text (capitalizeFirstLetter axisName) ]
+        , styledInput
+            [ type_ "text"
+            , name axisName
+            , id axisId
+            , placeholder "e.g. -12.3"
+            , value (extractCoordFromModel model axisNumber)
+            , onInput (updateAxis axisNumber)
+            ]
+            []
         ]
-        []
+
+
+styledLabel =
+    styled Html.Styled.label
+        [ margin (rem 0.5)
+        ]
+
+
+capitalizeFirstLetter : String -> String
+capitalizeFirstLetter string =
+    if string |> String.isEmpty then
+        ""
+
+    else
+        String.concat
+            [ String.left 1 string
+                |> String.toUpper
+            , String.dropLeft 1 string
+            ]
 
 
 extractCoordFromModel : Model -> Int -> String
@@ -156,9 +181,27 @@ view : Model -> VirtualDom.Node Msg
 view model =
     div []
         [ h1 [] [ text ("Pirate Weather v" ++ pirateVersion) ]
-        , p [] [ text "published 2025-06-15 by Mel Meadwell; available under AGPL-3.0-or-later" ]
+        , p [] [ text "Be it stormy or be it clear, now ye've got a pirate here! Yar!" ]
+        , p [] [ text "Published 2025-06-15 by Mel Meadwell; available under AGPL-3.0-or-later" ]
+        , p []
+            [ text
+                ("This is a strictly functional prototype!"
+                    ++ " It'll look prettier very soon."
+                    ++ " I had to teach myself Elm (which is a joy btw!)"
+                    ++ " and also figure out how to make a web app first. lol."
+                    ++ " Anyway, soon I'll have a real life PIRATE here to deliver the weather for me."
+                    ++ " Check back often!"
+                )
+            ]
         , form []
-            [ p [] [ text "Input lat/long coordinates" ]
+            [ p []
+                [ strong [] [ text "To use Pirate Weather:" ]
+                , text " Input latitude and longitude coordinates. Note that negatives and decimals "
+                , strong [] [ text "are" ]
+                , text " allowed! They're just tricky to input on some browsers, sorgy. xp"
+                , text " Accessibility will be a key design focus for the eventual v1.0 release,"
+                , text " but for now, just muck around a bit till it works. :)"
+                ]
             , inputCoordinateFromModel model 0
             , inputCoordinateFromModel model 1
             , styledButton

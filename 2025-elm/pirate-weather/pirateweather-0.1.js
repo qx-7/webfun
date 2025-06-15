@@ -6309,6 +6309,19 @@ var $rtfeldman$elm_css$Html$Styled$node = $rtfeldman$elm_css$VirtualDom$Styled$n
 var $rtfeldman$elm_css$Html$Styled$div = $rtfeldman$elm_css$Html$Styled$node('div');
 var $rtfeldman$elm_css$Html$Styled$form = $rtfeldman$elm_css$Html$Styled$node('form');
 var $rtfeldman$elm_css$Html$Styled$h1 = $rtfeldman$elm_css$Html$Styled$node('h1');
+var $elm$core$String$concat = function (strings) {
+	return A2($elm$core$String$join, '', strings);
+};
+var $elm$core$String$toUpper = _String_toUpper;
+var $author$project$Weather$capitalizeFirstLetter = function (string) {
+	return $elm$core$String$isEmpty(string) ? '' : $elm$core$String$concat(
+		_List_fromArray(
+			[
+				$elm$core$String$toUpper(
+				A2($elm$core$String$left, 1, string)),
+				A2($elm$core$String$dropLeft, 1, string)
+			]));
+};
 var $author$project$Weather$extractCoordFromModel = F2(
 	function (model, axisNumber) {
 		switch (axisNumber) {
@@ -6347,6 +6360,8 @@ var $rtfeldman$elm_css$Html$Styled$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $rtfeldman$elm_css$Html$Styled$Attributes$for = $rtfeldman$elm_css$Html$Styled$Attributes$stringProperty('htmlFor');
+var $rtfeldman$elm_css$Html$Styled$Attributes$id = $rtfeldman$elm_css$Html$Styled$Attributes$stringProperty('id');
 var $rtfeldman$elm_css$Html$Styled$Attributes$name = $rtfeldman$elm_css$Html$Styled$Attributes$stringProperty('name');
 var $rtfeldman$elm_css$Html$Styled$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
@@ -8139,6 +8154,25 @@ var $author$project$Weather$styledInput = A2(
 			$rtfeldman$elm_css$Css$padding(
 			$rtfeldman$elm_css$Css$rem(0.5))
 		]));
+var $rtfeldman$elm_css$Html$Styled$label = $rtfeldman$elm_css$Html$Styled$node('label');
+var $rtfeldman$elm_css$Css$margin = $rtfeldman$elm_css$Css$prop1('margin');
+var $author$project$Weather$styledLabel = A2(
+	$rtfeldman$elm_css$Html$Styled$styled,
+	$rtfeldman$elm_css$Html$Styled$label,
+	_List_fromArray(
+		[
+			$rtfeldman$elm_css$Css$margin(
+			$rtfeldman$elm_css$Css$rem(0.5))
+		]));
+var $rtfeldman$elm_css$VirtualDom$Styled$Unstyled = function (a) {
+	return {$: 'Unstyled', a: a};
+};
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $rtfeldman$elm_css$VirtualDom$Styled$text = function (str) {
+	return $rtfeldman$elm_css$VirtualDom$Styled$Unstyled(
+		$elm$virtual_dom$VirtualDom$text(str));
+};
+var $rtfeldman$elm_css$Html$Styled$text = $rtfeldman$elm_css$VirtualDom$Styled$text;
 var $rtfeldman$elm_css$Html$Styled$Attributes$type_ = $rtfeldman$elm_css$Html$Styled$Attributes$stringProperty('type');
 var $author$project$Weather$DoNothing = {$: 'DoNothing'};
 var $author$project$Weather$UpdateLatitude = function (a) {
@@ -8186,19 +8220,38 @@ var $author$project$Weather$inputCoordinateFromModel = F2(
 					return 'unknown';
 			}
 		}();
+		var axisId = axisName;
 		return A2(
-			$author$project$Weather$styledInput,
+			$rtfeldman$elm_css$Html$Styled$div,
+			_List_Nil,
 			_List_fromArray(
 				[
-					$rtfeldman$elm_css$Html$Styled$Attributes$type_('text'),
-					$rtfeldman$elm_css$Html$Styled$Attributes$name(axisName),
-					$rtfeldman$elm_css$Html$Styled$Attributes$placeholder('e.g. -12.3'),
-					$rtfeldman$elm_css$Html$Styled$Attributes$value(
-					A2($author$project$Weather$extractCoordFromModel, model, axisNumber)),
-					$rtfeldman$elm_css$Html$Styled$Events$onInput(
-					$author$project$Weather$updateAxis(axisNumber))
-				]),
-			_List_Nil);
+					A2(
+					$author$project$Weather$styledLabel,
+					_List_fromArray(
+						[
+							$rtfeldman$elm_css$Html$Styled$Attributes$for(axisId)
+						]),
+					_List_fromArray(
+						[
+							$rtfeldman$elm_css$Html$Styled$text(
+							$author$project$Weather$capitalizeFirstLetter(axisName))
+						])),
+					A2(
+					$author$project$Weather$styledInput,
+					_List_fromArray(
+						[
+							$rtfeldman$elm_css$Html$Styled$Attributes$type_('text'),
+							$rtfeldman$elm_css$Html$Styled$Attributes$name(axisName),
+							$rtfeldman$elm_css$Html$Styled$Attributes$id(axisId),
+							$rtfeldman$elm_css$Html$Styled$Attributes$placeholder('e.g. -12.3'),
+							$rtfeldman$elm_css$Html$Styled$Attributes$value(
+							A2($author$project$Weather$extractCoordFromModel, model, axisNumber)),
+							$rtfeldman$elm_css$Html$Styled$Events$onInput(
+							$author$project$Weather$updateAxis(axisNumber))
+						]),
+					_List_Nil)
+				]));
 	});
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -8218,6 +8271,7 @@ var $rtfeldman$elm_css$Html$Styled$Events$onClick = function (msg) {
 };
 var $rtfeldman$elm_css$Html$Styled$p = $rtfeldman$elm_css$Html$Styled$node('p');
 var $author$project$Weather$pirateVersion = '0.1';
+var $rtfeldman$elm_css$Html$Styled$strong = $rtfeldman$elm_css$Html$Styled$node('strong');
 var $rtfeldman$elm_css$Html$Styled$button = $rtfeldman$elm_css$Html$Styled$node('button');
 var $author$project$Weather$styledButton = A2(
 	$rtfeldman$elm_css$Html$Styled$styled,
@@ -8227,15 +8281,6 @@ var $author$project$Weather$styledButton = A2(
 			$rtfeldman$elm_css$Css$padding(
 			$rtfeldman$elm_css$Css$rem(0.5))
 		]));
-var $rtfeldman$elm_css$VirtualDom$Styled$Unstyled = function (a) {
-	return {$: 'Unstyled', a: a};
-};
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $rtfeldman$elm_css$VirtualDom$Styled$text = function (str) {
-	return $rtfeldman$elm_css$VirtualDom$Styled$Unstyled(
-		$elm$virtual_dom$VirtualDom$text(str));
-};
-var $rtfeldman$elm_css$Html$Styled$text = $rtfeldman$elm_css$VirtualDom$Styled$text;
 var $rtfeldman$elm_css$VirtualDom$Styled$UnscopedStyles = function (a) {
 	return {$: 'UnscopedStyles', a: a};
 };
@@ -9432,7 +9477,21 @@ var $author$project$Weather$view = function (model) {
 					_List_Nil,
 					_List_fromArray(
 						[
-							$rtfeldman$elm_css$Html$Styled$text('published 2025-06-15 by Mel Meadwell; available under AGPL-3.0-or-later')
+							$rtfeldman$elm_css$Html$Styled$text('Be it stormy or be it clear, now ye\'ve got a pirate here! Yar!')
+						])),
+					A2(
+					$rtfeldman$elm_css$Html$Styled$p,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$rtfeldman$elm_css$Html$Styled$text('Published 2025-06-15 by Mel Meadwell; available under AGPL-3.0-or-later')
+						])),
+					A2(
+					$rtfeldman$elm_css$Html$Styled$p,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$rtfeldman$elm_css$Html$Styled$text('This is a strictly functional prototype!' + (' It\'ll look prettier very soon.' + (' I had to teach myself Elm (which is a joy btw!)' + (' and also figure out how to make a web app first. lol.' + (' Anyway, soon I\'ll have a real life PIRATE here to deliver the weather for me.' + ' Check back often!')))))
 						])),
 					A2(
 					$rtfeldman$elm_css$Html$Styled$form,
@@ -9444,7 +9503,24 @@ var $author$project$Weather$view = function (model) {
 							_List_Nil,
 							_List_fromArray(
 								[
-									$rtfeldman$elm_css$Html$Styled$text('Input lat/long coordinates')
+									A2(
+									$rtfeldman$elm_css$Html$Styled$strong,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$rtfeldman$elm_css$Html$Styled$text('To use Pirate Weather:')
+										])),
+									$rtfeldman$elm_css$Html$Styled$text(' Input latitude and longitude coordinates. Note that negatives and decimals '),
+									A2(
+									$rtfeldman$elm_css$Html$Styled$strong,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$rtfeldman$elm_css$Html$Styled$text('are')
+										])),
+									$rtfeldman$elm_css$Html$Styled$text(' allowed! They\'re just tricky to input on some browsers, sorgy. xp'),
+									$rtfeldman$elm_css$Html$Styled$text(' Accessibility will be a key design focus for the eventual v1.0 release,'),
+									$rtfeldman$elm_css$Html$Styled$text(' but for now, just muck around a bit till it works. :)')
 								])),
 							A2($author$project$Weather$inputCoordinateFromModel, model, 0),
 							A2($author$project$Weather$inputCoordinateFromModel, model, 1),
