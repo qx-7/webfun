@@ -8,13 +8,14 @@ import Html.Styled.Events exposing (onClick, onInput)
 import Http
 import Json.Decode as Decode exposing (Decoder, decodeString, float, int, list, string)
 import Json.Decode.Pipeline exposing (optional, optionalAt, required, requiredAt)
+import Random
 import RemoteData exposing (WebData)
 import VirtualDom
 
 
 pirateVersion : String
 pirateVersion =
-    "0.1"
+    "0.1.1"
 
 
 type alias Weather =
@@ -33,6 +34,8 @@ type alias Model =
 
 type Msg
     = CheckWeather
+    | GetRandomLocation
+    | NewLocation ( Float, Float )
     | UpdateLatitude Float
     | UpdateLongitude Float
     | DataReceived (WebData Weather)
@@ -130,11 +133,13 @@ extractCoordFromModel : Model -> Int -> String
 extractCoordFromModel model axisNumber =
     case axisNumber of
         0 ->
+            --latitude
             model.locationCoords
                 |> Tuple.first
                 |> String.fromFloat
 
         1 ->
+            --longitude
             model.locationCoords
                 |> Tuple.second
                 |> String.fromFloat
@@ -193,6 +198,12 @@ view model =
                     ++ " Check back often!"
                 )
             ]
+        , p []
+            [ strong [] [ text "2025-08-18 update:" ]
+            , text " added random coordinate feature!"
+            , text " It picks a point from a uniform distribution of points on a sphere."
+            , text " Prepare to sale the WHOLE GLOBE!!!"
+            ]
         , form []
             [ p []
                 [ strong [] [ text "To use Pirate Weather:" ]
@@ -204,6 +215,11 @@ view model =
                 ]
             , inputCoordinateFromModel model 0
             , inputCoordinateFromModel model 1
+            , styledButton
+                [ onClick GetRandomLocation
+                , type_ "button"
+                ]
+                [ text "get random coordinates" ]
             , styledButton
                 [ onClick CheckWeather
                 , type_ "button"
@@ -327,6 +343,18 @@ checkWeather locationCoords =
         }
 
 
+randomCoordinates : Random.Generator ( Float, Float )
+randomCoordinates =
+    Random.map2
+        (\u v ->
+            ( 90 - (acos ((2 * v) - 1) * 180 / pi)
+            , 180 - ((2 * pi * u) * 180 / pi)
+            )
+        )
+        (Random.float 0 1)
+        (Random.float 0 1)
+
+
 newLocationCoords : ( Float, Float ) -> Int -> Float -> ( Float, Float )
 newLocationCoords oldCoords axisNumber newCoord =
     let
@@ -353,6 +381,18 @@ update msg model =
         CheckWeather ->
             ( { model | currentWeather = RemoteData.Loading }
             , checkWeather model.locationCoords
+            )
+
+        GetRandomLocation ->
+            ( model
+            , Random.generate NewLocation randomCoordinates
+            )
+
+        NewLocation ( latitude, longitude ) ->
+            ( { model
+                | locationCoords = ( latitude, longitude )
+              }
+            , Cmd.none
             )
 
         UpdateLatitude latitude ->
